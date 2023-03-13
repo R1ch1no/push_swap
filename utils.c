@@ -6,17 +6,17 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:19:18 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/10 16:42:57 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/13 12:07:05 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str, t_medium *medium)
+long	ft_atoi(const char *str, t_medium *medium)
 {
 	unsigned int	i;
 	long			result;
-	int				sign;
+	long			sign;
 
 	i = 0;
 	sign = 1;
@@ -27,15 +27,13 @@ int	ft_atoi(const char *str, t_medium *medium)
 		sign = sign * -1;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
+	if (str[i] > '9' || str[i] < '0')
+		medium->no = 1;
 	while (str[i] <= '9' && str[i] >= '0')
 	{
-		if (str[i] > '9' || str[i] < '0')
-			medium->no = 1;
 		result = (result * 10) + (str[i++] - '0');
-		if (result * sign > 2147483647)
-			return (-1);
-		if (result * sign < -2147483648)
-			return (0);
+		if ((str[i] > '9' || str[i] < '0') && str[i] != '\0')
+			medium->no = 1;
 	}
 	return (result * sign);
 }
