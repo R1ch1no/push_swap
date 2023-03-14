@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:44:56 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 19:47:05 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:22:58 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	main(int argc, char **argv)
 	ft_fill_stack_string(stack_a, argv, medium);
 	if (medium->argc == 3)
 		ft_sort_three(&stack_a, &stack_at, medium, 0);
-	else if (medium->argc == 5)
+	else if (medium->argc == 5 || medium->argc == 4)
 		ft_sort_five(&stack_a, &stack_b, medium);
 	else
 	{

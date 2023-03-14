@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:13:52 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 19:47:06 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:22:57 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,44 +86,12 @@ void	ft_big_sort(t_stack **stack_a, t_stack **stack_b, int argc)
 void	ft_logic(t_stack **stack_a, t_stack **stack_b, int argc,
 		t_stack **stack_at)
 {
-	/* 	t_stack	*current;
- */
 	if (ft_sorted((*stack_a)) == 1)
 	{
 		ft_pre_sort(stack_at, stack_b);
-		/* 		current = (*stack_a);
-		while (current != NULL)
-		{
-			printf("Stack_a_unidexed: %lli\n", current->num);
-			current = current->next;
-		} */
 		ft_index(stack_a, stack_at);
-		/* 		current = (*stack_a);
-		while (current != NULL)
-		{
-			printf("Stack_a_indexed: %lli\n", current->num);
-			current = current->next;
-		} */
 	}
-	/* 	current = (*stack_at);
-	while (current != NULL)
-	{
-		printf("Stack_at: %lli\n", current->num);
-		current = current->next;
-	}
-	current = (*stack_a);
-	while (current != NULL)
-	{
-		printf("Stack_a: %lli\n", current->num);
-		current = current->next;
-	} */
 	ft_big_sort(stack_a, stack_b, argc);
-	/* 	current = (*stack_a);
-	while (current != NULL)
-	{
-		printf("Stack_a_sorted: %lli\n", current->num);
-		current = current->next;
-	} */
 	ft_clean_stack((*stack_at));
 	ft_clean_stack((*stack_a));
 }

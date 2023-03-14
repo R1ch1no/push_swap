@@ -6,29 +6,25 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:16:12 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 19:47:02 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/14 23:23:00 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_done(t_stack **stack_a, t_stack **stack_at, t_medium *medium, int clean)
+void	ft_done(t_stack **stack_a, t_stack **stack_at, t_medium *medium,
+		int clean)
 {
-    if(clean == 0)
-    {
-	ft_clean_stack((*stack_a));
-	ft_clean_stack((*stack_at));
-	free(medium);
-    }
+	if (clean == 0)
+	{
+		ft_clean_stack((*stack_a));
+		free(stack_at);
+		free(medium);
+	}
 }
 
-void    ft_sort_two(t_stack **stack_a, t_stack **stack_b)
-{
-    if((*stack_a)->num < (*stack_a)->next->num)
-        ft_ss((*stack_a), (*stack_b), 'b');
-}
-
-void	ft_sort_three(t_stack **stack_a, t_stack **stack_at, t_medium *medium, int clean)
+void	ft_sort_three(t_stack **stack_a, t_stack **stack_at, t_medium *medium,
+		int clean)
 {
 	if ((*stack_a)->num > (*stack_a)->next->num
 		&& (*stack_a)->next->num > (*stack_a)->next->next->num)
@@ -57,11 +53,70 @@ void	ft_sort_three(t_stack **stack_a, t_stack **stack_at, t_medium *medium, int 
 	ft_done(stack_a, stack_at, medium, clean);
 }
 
+int	ft_min_place(t_stack *stack)
+{
+	t_stack	*current;
+	int		place;
+
+	current = stack;
+	place = 0;
+	while (current != NULL && current->num != ft_min(stack))
+	{
+		current = current->next;
+		place++;
+	}
+	return (place);
+}
+
+void	ft_put_away(t_stack **stack_a, t_stack **stack_b, int place)
+{
+	t_stack	*current;
+	int		size;
+
+	current = (*stack_a);
+	size = 0;
+	place = ft_min_place((*stack_a));
+	while (current->next != NULL)
+	{
+		current = current->next;
+		size++;
+	}
+	if (size == place)
+		ft_rrr(stack_a, stack_b, 'a');
+	else if (place == (size - 1))
+	{
+		ft_rrr(stack_a, stack_b, 'a');
+		ft_rrr(stack_a, stack_b, 'a');
+	}
+	else if (place == 2)
+	{
+		ft_rr(stack_a, stack_b, 'a');
+		ft_rr(stack_a, stack_b, 'a');
+	}
+	else if (place == 1)
+		ft_rr(stack_a, stack_b, 'a');
+}
+
 void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_medium *medium)
 {
-    ft_pp(stack_a,stack_b, 'b');
-    ft_pp(stack_a,stack_b, 'b');
-    ft_sort_two(stack_a, stack_b);
-    ft_sort_three(stack_a,stack_b,medium, 1);
-	ft_done(stack_a, stack_b, medium, 0);
+	if (medium->argc == 5)
+	{
+		ft_put_away(stack_a, stack_b, 0);
+		ft_pp(stack_a, stack_b, 'b');
+		ft_put_away(stack_a, stack_b, 0);
+		ft_pp(stack_a, stack_b, 'b');
+		ft_sort_three(stack_a, stack_b, medium, 1);
+		ft_pp(stack_b, stack_a, 'a');
+		ft_pp(stack_b, stack_a, 'a');
+	}
+	if (medium->argc == 4)
+	{
+		ft_put_away(stack_a, stack_b, 0);
+		ft_pp(stack_a, stack_b, 'b');
+		ft_sort_three(stack_a, stack_b, medium, 1);
+		ft_pp(stack_b, stack_a, 'a');
+	}
+	ft_clean_stack((*stack_a));
+	free((*stack_b));
+	free(medium);
 }
