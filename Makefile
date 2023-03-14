@@ -6,7 +6,7 @@
 #    By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/10 11:07:48 by rkurnava          #+#    #+#              #
-#    Updated: 2023/03/13 18:56:13 by rkurnava         ###   ########.fr        #
+#    Updated: 2023/03/14 19:47:05 by rkurnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = push_swap
 
 SRC =	main.c utils.c logic.c \
 		ss_rr.c pp_rrr.c \
+		small_sort.c\
 
 CC = cc
 

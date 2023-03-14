@@ -6,35 +6,87 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:44:56 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 11:51:58 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:47:05 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	ft_fill_stack(t_stack *stack, int argc, char **argv, t_medium *medium)
+int	ft_arg_count(char **argv)
 {
-	int			i;
-	long long	num;
+	int	i;
+	int	j;
+	int	arg;
+
+	j = 0;
+	arg = 0;
+	while (argv[++j] != NULL)
+	{
+		i = 0;
+		while (argv[j][i] != '\0')
+		{
+			while (((argv[j][i] == ' ') || (argv[j][i] > 8 && argv[j][i] < 14))
+				&& (argv[j][i] != '\0'))
+				i++;
+			if (!(((argv[j][i] == ' ') || (argv[j][i] > 8 && argv[j][i] < 14)))
+				&& (argv[j][i] != '\0'))
+				arg++;
+			while (!(((argv[j][i] == ' ') || (argv[j][i] > 8
+							&& argv[j][i] < 14))) && (argv[j][i] != '\0'))
+				i++;
+		}
+	}
+	return (arg);
+}
+
+int	ft_more_arg(char *arg)
+{
+	int	i;
 
 	i = 0;
-	while (argv[++i] != NULL)
+	while (arg[i])
 	{
-		if (argv[i])
+		while (((arg[i] == ' ') || (arg[i] > 8 && arg[i] < 14))
+			&& (arg[i] != '\0'))
+			i++;
+		if (arg[i] == '\0')
+			return (0);
+		if (arg[i] != '\0')
+			return (1);
+	}
+	return (1);
+}
+
+void	ft_fill_stack_string(t_stack *stack, char **argv, t_medium *medium)
+{
+	int	i;
+	int	j;
+	int	nums;
+
+	j = 0;
+	nums = 0;
+	while (argv[++j] != NULL)
+	{
+		i = 0;
+		while (argv[j][i] && ft_more_arg(&argv[j][i]) == 1)
 		{
-			stack->num = ft_atoi(argv[i], medium);
-			num = stack->num;
-			if (num > 2147483647 || num < -2147483648)
-				medium->no = 1;
-			if (i < argc - 1)
+			while (((argv[j][i] == ' ') || (argv[j][i] > 8 && argv[j][i] < 14))
+				&& (argv[j][i] != '\0'))
+				i++;
+			stack->num = ft_atoi(&argv[j][i], medium);
+			nums++;
+			while (!(((argv[j][i] == ' ') || (argv[j][i] > 8
+							&& argv[j][i] < 14))) && (argv[j][i] != '\0'))
+				i++;
+			if (nums < (medium->argc))
 			{
 				stack->next = malloc(sizeof(t_stack));
 				stack = stack->next;
 			}
 		}
+		stack->next = NULL;
 	}
-	stack->next = NULL;
 }
 
 void	ft_check_run(t_stack *stack_a, t_stack *stack_b, t_medium *medium,
@@ -51,7 +103,7 @@ void	ft_check_run(t_stack *stack_a, t_stack *stack_b, t_medium *medium,
 			ft_clean_stack(stack_at);
 		}
 		else
-			ft_logic(&stack_a, &stack_b, argc - 1, &stack_at);
+			ft_logic(&stack_a, &stack_b, argc, &stack_at);
 	}
 	else
 	{
@@ -69,17 +121,23 @@ int	main(int argc, char **argv)
 	t_stack		*stack_at;
 	t_medium	*medium;
 
-	medium = malloc(sizeof(t_medium));
 	if (argc < 2)
 		return (0);
+	medium = malloc(sizeof(t_medium));
 	stack_a = malloc(sizeof(t_stack));
 	stack_b = NULL;
 	stack_at = malloc(sizeof(t_stack));
 	medium->no = 0;
-	medium->argc = argc;
-	ft_fill_stack(stack_a, argc, argv, medium);
-	ft_fill_stack(stack_at, argc, argv, medium);
-	ft_check_run(stack_a, stack_b, medium, stack_at);
-	free(medium);
+	medium->argc = ft_arg_count(argv);
+	ft_fill_stack_string(stack_a, argv, medium);
+	if (medium->argc == 3)
+		ft_sort_three(&stack_a, &stack_at, medium, 0);
+	else if (medium->argc == 5)
+		ft_sort_five(&stack_a, &stack_b, medium);
+	else
+	{
+		ft_fill_stack_string(stack_at, argv, medium);
+		ft_check_run(stack_a, stack_b, medium, stack_at);
+	}
 	return (0);
 }

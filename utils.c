@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:19:18 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/13 18:56:09 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:47:01 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ long	ft_atoi(const char *str, t_medium *medium)
 	{
 		result = (result * 10) + (str[i++] - '0');
 	}
+	if (result * sign > 2147483647 || result * sign < -2147483648)
+		medium->no = 1;
 	return (result * sign);
 }
 
