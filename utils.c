@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:19:18 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 19:47:01 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:11:42 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ void	ft_clean_stack(t_stack *stack)
 	current = stack;
 	start = stack;
 	if (stack == NULL)
-		exit(0);
+	{
+		free(stack);
+		return ;
+	}
 	while (start->next)
 	{
 		while (current->next->next)

@@ -6,19 +6,19 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:16:12 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 23:23:00 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:55:30 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_done(t_stack **stack_a, t_stack **stack_at, t_medium *medium,
+void	ft_done(t_stack **stack_1, t_stack **stack_2, t_medium *medium,
 		int clean)
 {
 	if (clean == 0)
 	{
-		ft_clean_stack((*stack_a));
-		free(stack_at);
+		ft_clean_stack((*stack_1));
+		ft_clean_stack((*stack_2));
 		free(medium);
 	}
 }
@@ -97,7 +97,8 @@ void	ft_put_away(t_stack **stack_a, t_stack **stack_b, int place)
 		ft_rr(stack_a, stack_b, 'a');
 }
 
-void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_medium *medium)
+void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_medium *medium,
+		t_stack **stack_at)
 {
 	if (medium->argc == 5)
 	{
@@ -116,7 +117,5 @@ void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_medium *medium)
 		ft_sort_three(stack_a, stack_b, medium, 1);
 		ft_pp(stack_b, stack_a, 'a');
 	}
-	ft_clean_stack((*stack_a));
-	free((*stack_b));
-	free(medium);
+	ft_done(stack_a, stack_at, medium, 0);
 }

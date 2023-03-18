@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:35:50 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/14 22:42:59 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 15:51:39 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_medium
 {
 	int				argc;
 	int				no;
+	int				nums;
+
 }					t_medium;
 
 typedef struct s_stack
@@ -48,7 +50,7 @@ void				ft_rrr(t_stack **stack_a, t_stack **stack_b, char c);
 void				ft_sort_three(t_stack **stack_a, t_stack **stack_at,
 						t_medium *medium, int clean);
 void				ft_sort_five(t_stack **stack_a, t_stack **stack_b,
-						t_medium *medium);
+						t_medium *medium, t_stack **stack_at);
 void				ft_logic(t_stack **stack_a, t_stack **stack_b, int argc,
 						t_stack **stack_at);
 #endif
