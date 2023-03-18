@@ -6,25 +6,13 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:16:12 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/18 15:55:30 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:35:48 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_done(t_stack **stack_1, t_stack **stack_2, t_medium *medium,
-		int clean)
-{
-	if (clean == 0)
-	{
-		ft_clean_stack((*stack_1));
-		ft_clean_stack((*stack_2));
-		free(medium);
-	}
-}
-
-void	ft_sort_three(t_stack **stack_a, t_stack **stack_at, t_medium *medium,
-		int clean)
+void	ft_sort_three(t_stack **stack_a, t_stack **stack_at)
 {
 	if ((*stack_a)->num > (*stack_a)->next->num
 		&& (*stack_a)->next->num > (*stack_a)->next->next->num)
@@ -50,7 +38,6 @@ void	ft_sort_three(t_stack **stack_a, t_stack **stack_at, t_medium *medium,
 		&& (*stack_a)->num > (*stack_a)->next->next->num
 		&& (*stack_a)->next->num < (*stack_a)->next->next->num)
 		ft_rr(stack_a, stack_at, 'a');
-	ft_done(stack_a, stack_at, medium, clean);
 }
 
 int	ft_min_place(t_stack *stack)
@@ -97,25 +84,23 @@ void	ft_put_away(t_stack **stack_a, t_stack **stack_b, int place)
 		ft_rr(stack_a, stack_b, 'a');
 }
 
-void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_medium *medium,
-		t_stack **stack_at)
+void	ft_sort_five(t_stack **stack_a, t_stack **stack_b, t_medium *medium)
 {
-	if (medium->argc == 5)
+	if (medium->argc == 5 && ft_sorted((*stack_a)) == 1)
 	{
 		ft_put_away(stack_a, stack_b, 0);
 		ft_pp(stack_a, stack_b, 'b');
 		ft_put_away(stack_a, stack_b, 0);
 		ft_pp(stack_a, stack_b, 'b');
-		ft_sort_three(stack_a, stack_b, medium, 1);
+		ft_sort_three(stack_a, stack_b);
 		ft_pp(stack_b, stack_a, 'a');
 		ft_pp(stack_b, stack_a, 'a');
 	}
-	if (medium->argc == 4)
+	if (medium->argc == 4 && ft_sorted((*stack_a)) == 1)
 	{
 		ft_put_away(stack_a, stack_b, 0);
 		ft_pp(stack_a, stack_b, 'b');
-		ft_sort_three(stack_a, stack_b, medium, 1);
+		ft_sort_three(stack_a, stack_b);
 		ft_pp(stack_b, stack_a, 'a');
 	}
-	ft_done(stack_a, stack_at, medium, 0);
 }

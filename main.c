@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:44:56 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/18 15:55:54 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:59:50 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,25 +90,26 @@ void	ft_fill_stack_string(t_stack *stack, char **argv, t_medium *medium)
 void	ft_check_run(t_stack *stack_a, t_stack *stack_b, t_medium *medium,
 		t_stack *stack_at)
 {
-	int	argc;
-
-	argc = medium->argc;
-	if (medium->no == 0)
+	if (medium->no == 1 || ft_repeat(stack_a) == 1)
 	{
-		if (ft_repeat(stack_a) == 1)
-		{
-			ft_clean_stack(stack_a);
-			ft_clean_stack(stack_at);
-		}
-		else
-			ft_logic(&stack_a, &stack_b, argc, &stack_at);
-	}
-	else
-	{
+		write(1, "Error\n", 6);
 		ft_clean_stack(stack_a);
 		ft_clean_stack(stack_at);
-		write(1, "Error\n", 6);
+		free(medium);
+		return ;
 	}
+	if (ft_sorted(stack_a) == 1)
+	{
+		if (medium->argc == 3 && medium->no == 0)
+			ft_sort_three(&stack_a, &stack_b);
+		else if (medium->argc == 5 || medium->argc == 4)
+			ft_sort_five(&stack_a, &stack_b, medium);
+		else
+			ft_logic(&stack_a, &stack_b, medium->argc, &stack_at);
+	}
+	ft_clean_stack(stack_a);
+	ft_clean_stack(stack_at);
+	free(medium);
 }
 
 int	main(int argc, char **argv)
@@ -118,24 +119,18 @@ int	main(int argc, char **argv)
 	t_stack		*stack_at;
 	t_medium	*medium;
 
-	if (argc < 2)
+	if (argc < 2 || ft_arg_count(argv) <= 1)
 		return (0);
 	medium = malloc(sizeof(t_medium));
 	stack_a = malloc(sizeof(t_stack));
 	stack_b = NULL;
 	stack_at = malloc(sizeof(t_stack));
+	medium->argc = ft_arg_count(argv);
 	medium->no = 0;
 	medium->nums = 0;
-	medium->argc = ft_arg_count(argv);
 	ft_fill_stack_string(stack_a, argv, medium);
-	if (medium->argc == 3)
-		ft_sort_three(&stack_a, &stack_at, medium, 0);
-	else if (medium->argc == 5 || medium->argc == 4)
-		ft_sort_five(&stack_a, &stack_b, medium, &stack_at);
-	else
-	{
-		ft_fill_stack_string(stack_at, argv, medium);
-		ft_check_run(stack_a, stack_b, medium, stack_at);
-	}
+	medium->nums = 0;
+	ft_fill_stack_string(stack_at, argv, medium);
+	ft_check_run(stack_a, stack_b, medium, stack_at);
 	return (0);
 }

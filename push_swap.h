@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:35:50 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/18 15:51:39 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:36:54 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ void				ft_rr(t_stack **stack_a, t_stack **stack_b, char c);
 void				ft_rrt(t_stack **stack);
 void				ft_rrr(t_stack **stack_a, t_stack **stack_b, char c);
 //logic
-void				ft_sort_three(t_stack **stack_a, t_stack **stack_at,
-						t_medium *medium, int clean);
+void				ft_sort_three(t_stack **stack_a, t_stack **stack_at);
 void				ft_sort_five(t_stack **stack_a, t_stack **stack_b,
-						t_medium *medium, t_stack **stack_at);
+						t_medium *medium);
 void				ft_logic(t_stack **stack_a, t_stack **stack_b, int argc,
 						t_stack **stack_at);
 #endif

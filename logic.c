@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:13:52 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/18 15:28:50 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/18 17:30:38 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,7 @@ void	ft_big_sort(t_stack **stack_a, t_stack **stack_b, int argc)
 void	ft_logic(t_stack **stack_a, t_stack **stack_b, int argc,
 		t_stack **stack_at)
 {
-	if (ft_sorted((*stack_a)) == 1)
-	{
-		ft_pre_sort(stack_at, stack_b);
-		ft_index(stack_a, stack_at);
-	}
+	ft_pre_sort(stack_at, stack_b);
+	ft_index(stack_a, stack_at);
 	ft_big_sort(stack_a, stack_b, argc);
-	ft_clean_stack((*stack_at));
-	ft_clean_stack((*stack_a));
 }
