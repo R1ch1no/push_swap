@@ -6,7 +6,7 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:19:18 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/18 19:47:14 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:06:44 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 long	ft_atoi(const char *str, t_medium *medium)
 {
 	unsigned int	i;
-	long			result;
-	long			sign;
+	long long		result;
+	long long		sign;
 
 	i = 0;
 	sign = 1;
@@ -32,10 +32,10 @@ long	ft_atoi(const char *str, t_medium *medium)
 	while (str[i] <= '9' && str[i] >= '0')
 	{
 		result = (result * 10) + (str[i++] - '0');
+		if (result * sign > 2147483647 || result * sign < -2147483648)
+			medium->no = 1;
 	}
 	if (str[i] != '\0' && str[i] != ' ' && (str[i] < 8 || str[i] > 15))
-		medium->no = 1;
-	if (result * sign > 2147483647 || result * sign < -2147483648)
 		medium->no = 1;
 	return (result * sign);
 }

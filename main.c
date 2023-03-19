@@ -6,12 +6,11 @@
 /*   By: rkurnava <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 14:44:56 by rkurnava          #+#    #+#             */
-/*   Updated: 2023/03/18 19:59:50 by rkurnava         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:06:49 by rkurnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	ft_arg_count(char **argv)
 {
