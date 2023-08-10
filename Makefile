@@ -25,9 +25,6 @@ CFLAGS = -Werror -Wextra -Wall
 
 OBJ = $(SRC:.c=.o)
 
-%.o: %.c $(DEPS)
-	@$(CC) -c -o $@ $< $(CFLAGS)
-
 $(NAME): $(OBJ)
 	@$(CC) -o $@ $^ $(CFLAGS)
 	@echo "$(NAME) created"
